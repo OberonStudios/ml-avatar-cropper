@@ -1,96 +1,77 @@
-/***************************************************************
-  node.js express app file form server upload w/ Multer demo
-  App created by:  Jesse Lewis
-  Multer Config used based on tutorial by Ashish Mehra via Youtube
-  @ https://www.youtube.com/watch?v=sMnqnvW81to&lc=z23htp54jwmhwni0nacdp43axbwhgu3y3fg0jwzwhatw03c010c
-******************************************************************************************************/
+const express = require('express');
+const multer = require('multer');
+const bodyParser = require('body-parser');
+const ps = require('python-shell');
+const path = require('path')
 
-  // RUN PACKAGES
-  const express = require('express');
-  const multer = require('multer');
-  const bodyParser = require('body-parser');
-  const ps = require('python-shell');
- 
-  
-  // SETUP APP
-  const app = express();
-  const port = process.env.PORT || 3000;
-  app.use(bodyParser.urlencoded({extended:false}));
-  app.use(bodyParser.json());
-  app.use('/', express.static(__dirname + '/'));
-  app.use('/', express.static(__dirname + '/public'));
-  app.set('view engine', 'ejs');
+const app = express();
+const port = process.env.PORT || 3000;
+app.use(bodyParser.urlencoded({extended:false}));
+app.use(bodyParser.json());
+// Static files
+app.use('/', express.static(path.join(__dirname, '/')));
+app.use('/', express.static(path.join(__dirname, '/public')));
+// Docs static files
+app.use('/', express.static(path.join(__dirname, '/docs/static')));
+app.use('/docs/', express.static(path.join(__dirname, '/docs/client')));
+app.use('/docs/', express.static(path.join(__dirname, '/docs/static')));
+app.set('view engine', 'ejs');
 
 
-  //MULTER CONFIG: to get file photos to temp server storage
-  const multerConfig = {
+// Multer config
+const multerConfig = {
 
-    //specify diskStorage (another option is memory)
-    storage: multer.diskStorage({
+  storage: multer.diskStorage({
+    // Set destination
+    destination: function(req, file, next){
+      next(null, './media');
+    },
 
-      //specify destination
-      destination: function(req, file, next){
-        next(null, './media');
-      },
-
-      //specify the filename to be unique
-      filename: function(req, file, next){
-        console.log(file);
-        //get the file mimetype ie 'image/jpeg' split and prefer the second value ie'jpeg'
-        const ext = file.mimetype.split('/')[1];
-        //set the file fieldname to a unique name containing the original name, current datetime and the extension.
-        next(null, file.fieldname + '-' + Date.now() + '.'+ext);
-      }
-    }),
-
-    // filter out and prevent non-image files.
-    fileFilter: function(req, file, next){
-          if(!file){
-            next();
-          }
-
-        // only permit image mimetypes
-        const image = file.mimetype.startsWith('image/');
-        if(image){
-          console.log('photo uploaded');
-          next(null, true);
-        }else{
-          console.log("file not supported")
-          return next();
-        }
+    // Set filename
+    // Use timesignature
+    filename: function(req, file, next){
+      // Get files mimetype ie 'image/jpeg' 
+      const ext = file.mimetype.split('/')[1];
+      // Timesign
+      next(null, file.fieldname + '-' + Date.now() + '.'+ext);
     }
-  };
+  }),
 
-
-  app.get('/', function(req, res){
-    res.render('index.html');
-  });
-
-  app.post('/upload', multer(multerConfig).single('photo'), async function(req, res){
-      //Here is where I could add functions to then get the url of the new photo
-      //And relocate that to a cloud storage solution with a callback containing its new url
-      //then ideally loading that into your database solution.   Use case - user uploading an avatar...
-  
-      let pic_url = req.file.filename
-
-      let options = {
-        args: [pic_url]
-      };
-
-      try {
-        await ps.PythonShell.run('ml.py', options, function (err) {
-          if (err) throw err;
-          console.log('finished');
-          res.render('../public/profile.ejs', {pic_url: pic_url});
-        });
-      } catch(e){
-        console.log(e);
+  // Filter files
+  fileFilter: function(req, file, next){
+      if(!file){
+        next();
+      }
+      const image = file.mimetype.startsWith('image/');
+      if(image){
+        console.log('photo uploaded');
+        next(null, true);
+      }else{
+        console.log("file not supported")
+        return next();
       }
   }
+};
 
-);
 
-  // RUN SERVER
-  app.listen(port,function(){
-    console.log(`Server listening on port ${port}`);
-  });
+app.post('/upload', multer(multerConfig).single('photo'), async function(req, res){
+    // Get pic name 
+    let pic_url = req.file.filename
+    // Python shell config
+    let options = {
+      args: [pic_url]
+    };
+
+    try {
+      await ps.PythonShell.run('ml.py', options, function (err) {
+        if (err) throw err;
+        res.render('../public/profile.ejs', {pic_url: pic_url});
+      });
+    } catch(e){
+      console.log(e);
+    }
+});
+
+app.listen(port,function(){
+  console.log(`Server si running on port ${port}`);
+});

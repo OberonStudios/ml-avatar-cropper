@@ -2,7 +2,6 @@ import face_recognition
 from PIL import Image, ImageDraw
 import sys
 
-# my_file = 'photo-1544938949944.jpeg'
 my_file = str(sys.argv[1])
 
 in_image = face_recognition.load_image_file('./media/'+my_file)

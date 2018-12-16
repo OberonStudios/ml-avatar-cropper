@@ -1,8 +1,8 @@
 {
-  "name": "express-app-file-form-upload-demo",
-  "version": "1.0.0",
-  "description": "This is a repo as part of a blog post on how to achieve creating a web form that submit's users files to a temporary folder on your Node.js app's server.   ",
-  "main": "App.js",
+  "name": "ml-avatar-cropper-node",
+  "version": "0.0.1",
+  "description": "",
+  "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -23,7 +23,7 @@
     "to",
     "server"
   ],
-  "author": "Jesse Lewis",
+  "author": "Oberon Studios",
   "license": "ISC",
   "dependencies": {
     "body-parser": "^1.18.2",

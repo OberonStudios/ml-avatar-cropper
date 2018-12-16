@@ -21,11 +21,11 @@
               <h3 class="subtitle">
                 Documentation
               </h3>
-              <a href="https://github.com/OberonStudios/django-face-detect" target="_blank" class="button is-primary is-large">
+              <a href="https://github.com/OberonStudios" target="_blank" class="button is-primary is-large">
                 <span class="icon">
                   <i class="fab fa-github"></i>
                 </span>
-                <span>Project on GitHub</span>
+                <span>More on GitHub</span>
               </a>
             </div>
           </div>
@@ -50,7 +50,7 @@
               <div class="box">
                 <h4 id="const" class="title is-4">NodeJS</h4>
                 <p>First, get our NodeJS starting setup from GitHub.</p>
-                <pre><code class="language-javascript">$ git clone some addrs</code></pre>
+                <pre><code class="language-javascript">$ git clone https://github.com/OberonStudios/ml-avatar-cropper-node</code></pre>
                 <p>This tutorial assumes that you already have both Python and Node installed on your system. Get in projects directory and install dependencies.</p>
                 <h4 id="const" class="title is-5">Python</h4>
                 <p>Dependencies are in <code>requirements.py</code>. You can install them in your environemt, however I reccomment to create another environment.</p>
@@ -67,7 +67,7 @@
             <div class="box">
                 <h4 id="const" class="title is-4">Django</h4>
                 <p>First, get our Django starting setup from GitHub.</p>
-                <pre><code class="language-javascript">$ git clone some addrs</code></pre>
+                <pre><code class="language-javascript">$ git clone https://github.com/OberonStudios/ml-avatar-cropper-django</code></pre>
                 <p>This tutorial assumes that you already have Python installed on your system. Get in projects directory and install dependencies.</p>
                 <h4 id="const" class="title is-5">Python</h4>
                 <p>Dependencies are in <code>requirements.py</code>. You can install them in your environemt, however I reccomment to create another environment.</p>
@@ -138,11 +138,11 @@
                       Due to low-computational power of this server, current picture resolution is limited!
                     </div>
                   </article>
-                  <form method="post" enctype="multipart/form-data" action="/upload">
+                  <form action="/upload" enctype="multipart/form-data" method="POST">
                     <div class="field">
                       <div class="file has-name is-boxed">
                         <label class="file-label">
-                          <input class="file-input" type="file" name="resume">
+                          <input class="file-input" type="file" id=photo" name="photo">
                           <span class="file-cta">
                             <span class="file-icon">
                                 <i class="fas fa-camera-retro"></i>
@@ -154,7 +154,7 @@
                         </label>
                       </div>
                     </div>
-                    <input class="button is-link is-rounded" type="submit" value="Submit">
+                    <input id="inputGroupFileAddon02" class="button is-link is-rounded" type="submit" value="Upload">
                     </form>
                   </div>
                 </div>
