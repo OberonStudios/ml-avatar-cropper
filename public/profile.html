@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+</head>
+<style>
+    body {
+        display: flex;
+        flex-direction:row; 
+        justify-content: center;
+        margin:0;
+        padding:0;
+        font-family: Sans-Serif;
+    }
+    a {
+        text-decoration: none;
+        display: block;
+    }
+    .card-body {
+        width: 300px;
+        height: 378px;
+        border-radius: 10px;
+        border: 2px solid lightgray;
+        background-color: white;
+    }
+    .card-top-section {
+        height: 40px;
+    }
+    .card-bottom-section{
+        margin-top: 80px; /* calc: img 75px + border 5px */
+        border-bottom-left-radius: 7px;
+        border-bottom-right-radius: 7px;
+        background-color: #4078C0; /* Github official blue */
+    }
+    .github-logo-holder {
+        background-color: transparent;
+    }
+    .github-logo-holder img {
+        padding: 5px;
+    }
+    .profile-img-holder {
+        position: relative;
+        width: 160px;
+        margin-left:auto;
+        margin-right:auto;
+    }
+    .profile-img-holder .profile-img {
+        width: 150px;
+        height: 150px;
+        border-radius: 100px;
+        border: 5px solid white;
+    }
+    .profile-desc .profile-full-name {
+        margin: 0px;
+        padding-top: 100px;
+        font-size: 32px;
+    }
+    .profile-desc .profile-user-name {
+        margin: 0px;
+        padding-top: 10px;
+        padding-bottom: 10px;
+        font-size: 23px;
+    }
+    .profile-stats {
+        border-top: 1px solid lightgray;
+    }
+    .stat {
+        display:inline-block;
+        width: 33.3333%;
+    }
+    .stat .stat-contents {
+        transition: background-color .1s linear;
+        border-right: solid 1px lightgray;
+        padding-top: 10px;
+        padding-bottom: 10px;
+    }
+    .stat:first-child .stat-contents {
+        border-bottom-left-radius: 7px;
+    }
+    .stat:last-child .stat-contents {
+        border-bottom-right-radius: 7px;
+    }
+    .stat .stat-contents:hover {
+        cursor: pointer;
+        background-color: #6192D2;
+        transition: background-color .1s linear;
+    }
+    .profile-stats .stat:last-child .stat-contents {
+        border-right: none;
+    }
+    .stat .stat-amount,
+    .stat .stat-name {
+        margin: 0px;
+    }
+    .profile-desc, .profile-desc a {
+        text-align:center;
+        color: white;
+    }
+    .profile-stats, .profile-stats a {
+        text-align:center;
+        color: #333;
+    }
+</style>
+<body>
+<div class="card-container">
+    <div class="card-body">
+        <div class="card-top-section">
+            <div class="github-logo-holder">
+                <img src="assets/GitHub-Mark-32px.png"
+                     alt="Github Logo" width="25px">
+            </div>
+            <div class="profile-img-holder">
+                <a class="gc-avatar-link" href="">
+                    <img class="profile-img gc-avatar-url" src="https://avatars1.githubusercontent.com/u/13069486?s=400&u=6ab8ffd5b3bfed00aea69b070d141e2620fc6f7c&v=4">
+                </a>
+            </div>
+        </div>
+        <div class="card-bottom-section gc-primary">
+            <div class="profile-desc">
+                <a class="profile-full-name gc-name" href="https://github.com/ryan-bower">Ryan Bower</a>
+                <a class="profile-user-name gc-login" href="https://github.com/ryan-bower">@ryan-bower</a>
+            </div>
+            <div class="profile-stats">
+                <!-- TODO: Replace with dynamic js solution -->
+                <div class="stat">
+                    <a class="gc-repos-link">
+                        <div class="stat-contents gc-repos-link">
+                            <h1 class="stat-amount gc-num-repos">123</h1>
+                            <div class="stat-name">Repos</div>
+                        </div>
+                    </a>
+                </div><!--
+                --><div class="stat">
+                    <a class="gc-gists-link">
+                        <div class="stat-contents gc-gists-link">
+                            <h1 class="stat-amount gc-num-gists">456</h1>
+                            <div class="stat-name">Gists</div>
+                        </div>
+                    </a>
+                </div><!--
+                --><div class="stat">
+                    <a class="gc-followers-link">
+                        <div class="stat-contents">
+                            <h1 class="stat-amount gc-num-followers">789</h1>
+                            <div class="stat-name">Followers</div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
